@@ -24,7 +24,7 @@ public class EliminarHuesped extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EliminarHuesped extends HttpServlet {
         String okstr = GenericHttpServlet.sr.removeHuesped(str);
         ClaseConOk removeHuesped = (ClaseConOk) GenericHttpServlet.miStream.fromXML(okstr);
         
-        String message = "";
+        String message;
         boolean isOk = removeHuesped.isOk();
         if(isOk) {
             message = "Se ha borrado con éxito";

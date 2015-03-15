@@ -35,12 +35,16 @@ public class EditarReserva extends HttpServlet {
             String reservastr = GenericHttpServlet.sr.getReserva(GenericHttpServlet.miStream.toXML(fn));
             Reserva r = (Reserva) GenericHttpServlet.miStream.fromXML(reservastr);
             if(r == null) {
-                //throws;
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "Reserva no encontrada");
+                response.sendRedirect("./Reservas");
             }
         } catch (ParseException ex) {
             Logger.getLogger(EditarReserva.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(EditarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("error", true);
+            request.getSession().setAttribute("msg", "Reserva no encontrada");
+            response.sendRedirect("./Reservas");
         }
         
     }

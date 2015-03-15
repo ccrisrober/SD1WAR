@@ -60,7 +60,7 @@ public class BuscarHuesped extends HttpServlet {
         }
         if (res == null) {
             try (PrintWriter out = response.getWriter()) {
-                ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
+                ClaseConError error = new ClaseConError(403, "Servicio no encontrado");
                 String errorStr = GenericHttpServlet.miStream.toXML(error);
                 out.append(errorStr);
             }

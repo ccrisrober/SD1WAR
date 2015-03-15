@@ -10,7 +10,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap 3, from LayoutIt!</title>
+        <title>Añadir huésped</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -82,7 +82,7 @@
                         Añadir nuevo huésped
                     </h3>
 
-                    <form method='POST' action='' role="form">
+                    <form method='POST' action='' role="form" class="form-horizontal">
 
                         <c:if test="${errors != null}">
                             <div class="alert alert-dismissable alert-warning">
@@ -95,39 +95,56 @@
                         </c:if>
                         <fieldset>
                             <div class="form-group">
-                                <label for="huesped.NIF">NIF: </label>
-                                <input type="text" class="form-control" name="huesped.NIF" value='${huesped.NIF}' />
+                                <label for="huesped.NIF" class="col-sm-2 control-label">NIF: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.NIF" value='${huesped.NIF}' />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="huesped.nombre">Nombre:</label>
-                                <input type="text" class="form-control" name="huesped.nombre" value='${huesped.nombre}' />
+                                <label for="huesped.nombre" class="col-sm-2 control-label">Nombre:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.nombre" value='${huesped.nombre}' />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="huesped.apellidos">Apellidos: </label>
-                                <input type="text" class="form-control" name="huesped.apellidos" value='${huesped.apellidos}' />
+                                <label for="huesped.apellidos" class="col-sm-2 control-label">Apellidos: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.apellidos" value='${huesped.apellidos}' />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="huesped.apellidos">Fecha de nacimiento: </label>
-                                <input type='date' name='huesped.fechaNacimiento' value='${huesped.nacimiento}' /></p>
+                                <label for="huesped.apellidos" class="col-sm-2 control-label">Fecha de nacimiento: </label>
+                                <div class="col-sm-10">
+                                    <input type='date' name='huesped.fechaNacimiento' value='${huesped.nacimiento}' /></p>
+                                </div>
                             </div>
                             <div class="form-group" title="Domicilio">
                                 <div class="form-group">
-                                    <label for="huesped.apellidos">Dirección: </label>
-                                    <input type="text" class="form-control" name="huesped.direccion" value='${huesped.domicilio.direccion}' />
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Dirección: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.direccion" value='${huesped.domicilio.direccion}' />
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="huesped.apellidos">Localidad: </label>
-                                    <input type="text" class="form-control" name="huesped.localidad" value='${huesped.domicilio.localidad}' />
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Localidad: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.localidad" value='${huesped.domicilio.localidad}' />
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="huesped.apellidos">Provincia: </label>
-                                    <input type="text" class="form-control" name="huesped.provincia" value='${huesped.domicilio.provincia}' />
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Provincia: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.provincia" value='${huesped.domicilio.provincia}' />
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="huesped.apellidos">Código postal: </label>
-                                    <input type="text" class="form-control" name="huesped.codigoPostal" value='${huesped.domicilio.codigoPostal}' />
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Código postal: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.codigoPostal" value='${huesped.domicilio.codigoPostal}' />
+                                    </div>
                                 </div>
                             </div>
+                            FALTA TELÉFONO Y EMAIL QUE SON OPCIONALES
                             <button type="submit" class="btn btn-default">Submit</button>
                         </fieldset>
                     </form>

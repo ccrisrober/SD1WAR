@@ -33,17 +33,22 @@ public class VerHuesped extends HttpServlet {
             Huesped h = (Huesped) miStream.fromXML(huespedStr);
             response.setContentType("text/html;charset=UTF-8");
             if (h == null) {
-                //throws;
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "No se ha encontrado huesped");
+                response.sendRedirect("./Huespeds");
             }
             request.setAttribute("huesped", h);
             request.getRequestDispatcher("WEB-INF/views/huespeds/view.jsp").forward(request, response);
         } catch (NotFoundException ex) {
-            Logger.getLogger(VerHuesped.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("error", true);
+            request.getSession().setAttribute("msg", "No se ha encontrado huesped");
+            response.sendRedirect("./Huespeds");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 }

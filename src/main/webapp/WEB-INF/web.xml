@@ -92,6 +92,10 @@
         <servlet-name>BuscarReservaWS</servlet-name>
         <servlet-class>com.distribuidos.sd12015.servlets.ws.BuscarReserva</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarReserva</servlet-name>
+        <servlet-class>com.distribuidos.sd12015.servlets.BuscarReserva</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AniadirHuesped</servlet-name>
         <url-pattern>/AniadirHuesped</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>BuscarReservaWS</servlet-name>
         <url-pattern>/WS/BuscarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarReserva</servlet-name>
+        <url-pattern>/BuscarReserva</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

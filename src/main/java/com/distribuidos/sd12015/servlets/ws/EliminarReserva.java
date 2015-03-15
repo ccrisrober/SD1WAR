@@ -58,7 +58,7 @@ public class EliminarReserva extends HttpServlet {
         Map<String, String> values = new HashMap<>();
         for (String p : params) {
             String value = request.getParameter(p);
-            if (value == null && !value.isEmpty()) {
+            if (value == null || value.isEmpty()) {
                 try (PrintWriter out = response.getWriter()) {
                     ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
                     String errorStr = GenericHttpServlet.miStream.toXML(error);

@@ -82,6 +82,20 @@
                     <h3>
                         RESERVAS
                     </h3>
+                    <c:if test="${ok != null}">
+                        <c:if test="${ok == true}">
+                            <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <p>${msg}</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${ok == false}">
+                            <div class="alert alert-dismissable alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <p>${msg}</p>
+                            </div>
+                        </c:if>
+                    </c:if>
                     <table class="table table-striped">
                         <tr>
                             <th>NIF</th>

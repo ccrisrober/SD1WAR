@@ -21,11 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 public class AniadirReserva extends HttpServlet {
 
     protected static List<String> params;
-    
+
     static {
         params = new LinkedList<>();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

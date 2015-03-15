@@ -24,6 +24,14 @@ public class Reservas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        if (request.getSession().getAttribute("ok") != null) {
+            request.setAttribute("ok", request.getSession().getAttribute("ok"));
+            request.getSession().removeAttribute("ok");
+        }
+        if (request.getSession().getAttribute("msg") != null) {
+            request.setAttribute("msg", request.getSession().getAttribute("msg"));
+            request.getSession().removeAttribute("msg");
+        }
         String reservasstr = GenericHttpServlet.sr.getReservas();
         List<Reserva> reservas = (List<Reserva>) miStream.fromXML(reservasstr);
         request.setAttribute("reservas", reservas);
@@ -33,5 +41,6 @@ public class Reservas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 }

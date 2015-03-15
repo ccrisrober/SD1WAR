@@ -7,9 +7,7 @@ package com.distribuidos.sd12015.servlets.ws;
 
 import com.distribuidos.sd12015.data.ClaseConError;
 import com.distribuidos.sd12015.data.ClaseConNif;
-import com.distribuidos.sd12015.data.ClaseConOk;
 import com.distribuidos.sd12015.servlets.GenericHttpServlet;
-import static com.distribuidos.sd12015.servlets.ws.AniadirHuesped.params;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -53,7 +51,7 @@ public class EliminarHuesped extends HttpServlet {
         Map<String, String> values = new HashMap<>();
         for (String p : params) {
             String value = request.getParameter(p);
-            if (value == null && !value.isEmpty()) {
+            if (value == null || value.isEmpty()) {
                 try (PrintWriter out = response.getWriter()) {
                     ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
                     String errorStr = GenericHttpServlet.miStream.toXML(error);

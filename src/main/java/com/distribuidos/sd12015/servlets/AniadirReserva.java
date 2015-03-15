@@ -38,7 +38,7 @@ public class AniadirReserva extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<String> errors = new LinkedList<String>();
+        List<String> errors = new LinkedList<>();
         try {
             request.setCharacterEncoding("UTF-8");
             String initDate = request.getParameter("reserva.fechaEntrada");
@@ -56,8 +56,11 @@ public class AniadirReserva extends HttpServlet {
                 ClaseConOkYDuple addReserva = (ClaseConOkYDuple) GenericHttpServlet.miStream.fromXML(addstr);
                 if(addReserva.isOk()) {
                     response.sendRedirect("./VerReserva?NIF=" + addReserva.getDuple().getF() + "&fechaInicio=" + ServicioREST.dateToStr(addReserva.getDuple().getE()));
+                } else {
+                    request.getSession().setAttribute("error", true);
+                    request.getSession().setAttribute("msg", "No se ha podido añadir");
+                    response.sendRedirect("./Reservas");
                 }
-                //TODO: Y ahora??
             } else {
                 request.setAttribute("huespeds", (List<Huesped>) GenericHttpServlet.miStream.fromXML(GenericHttpServlet.sr.getHuespeds()));
                 request.setAttribute("reserva", new Reserva(NIF, -1, d2, d2));

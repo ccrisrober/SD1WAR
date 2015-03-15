@@ -21,14 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AniadirHuesped extends HttpServlet {
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,14 +29,6 @@ public class AniadirHuesped extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/views/huespeds/add.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +36,7 @@ public class AniadirHuesped extends HttpServlet {
         String name = request.getParameter("huesped.nombre");
         String surname = request.getParameter("huesped.apellidos");
         String NIF = request.getParameter("huesped.NIF");
-        List<String> errors = new LinkedList<String>();
+        List<String> errors = new LinkedList<>();
         if (name.length() < 3) {
             errors.add("Mínimo 3 caracteres para nombre.");
         }
@@ -81,7 +65,9 @@ public class AniadirHuesped extends HttpServlet {
             if (ok.isOk()) {
                 response.sendRedirect("./VerHuesped?NIF=" + NIF);
             } else {
-                // TODO: ERROR
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "No se ha podido añadir");
+                response.sendRedirect("./Huespeds");
             }
         }
     }

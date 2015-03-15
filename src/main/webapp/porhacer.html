@@ -1,42 +1,67 @@
+PÁGINA WEB:
 
--Dar estilo al resto de vistas
--Controlar todos los errores en los envíos de datos
--Control de errores 404 y 500 mínimo (están en el web.xml pero faltan las vistas)
--Añadir los campos de domicilio y demases a los formularios
--A POR ELLO!
+    - Huespeds:
+        * Búsqueda nombre: OK
+        * Búsqueda apellidos: OK
+        * Index o listado: OK
+        * Editar:   Faltan campos. 
+                    En el servidor ahora mismo solo se tratan Nombre, Nif y Apellidos, falta todo el resto. 
+                    Recordar que correo y dos números de teléfono son opcionales, pero el resto es obligatorio 
+                        (poner restricción al menos de que el valor tenga longitud mayor que 0)
+        * Añadir:   Faltan campos opcionales. 
+                    En el servidor ahora mismo solo se tratan Nombre, Nif y Apellidos, falta todo el resto. 
+                    Recordar que correo y dos números de teléfono son opcionales, pero el resto es obligatorio 
+                        (poner restricción al menos de que el valor tenga longitud mayor que 0)
+        * Borrado:  OK
+        * Ver:      Falta mostrar el resto de campos. Solo muestra NIF, Nombre y Apellidos.
 
+    - Reservas:
+        * Búsqueda por fecha entrada: Sin hacer
+        * Index: Ok
+        * Editar: Creo que Ok
+        * Añadir: Creo que Ok
+        * Borrado: Sin hacer
+        * Ver: Ok
+        
+    - Otros: Control de errores 404 y 500 mínimo (están en el web.xml pero faltan las vistas)
+    
+SERVICIOS WEB:
+    Esto me lo miro yo de momento.
 
-WS:
-    Listar: 
-        GET: Devuelve todos
-        POST: ERROR 404
-    Añadir:
-        GET: Error 404
-        POST: Añade
-    Editar:
-        Get: Devuelve objeto
-        POST: Edita
-    Borrado:
-        Get: Error 404
-        POST: Borra
-    Ver:
-        Get: Devuelve objeto
-        POST: Error 404
-       
-Web:
-    Listar: 
-        GET: Devuelve todos
-        POST: ERROR 404
-    Añadir:
-        GET: Redirije a formulario
-        POST: Añade
-    Editar:
-        Get: Devuelve objeto
-        POST: Edita
-    Borrado:
-        Get: Error 404
-        POST: Borra
-    Ver:
-        Get: Devuelve objeto
-        POST: Error 404
-       
+    
+FORMATO FINAL GET/POST
+    WS:
+        Listar: 
+            GET: Devuelve todos
+            POST: ERROR 404
+        Añadir:
+            GET: Error 404
+            POST: Añade
+        Editar:
+            GET: Error 404
+            POST: Edita
+        Borrado:
+            GET: Error 404
+            POST: Borra
+        Ver:
+            GET: Devuelve objeto
+            POST: Error 404
+        Otros: Si falta un parámetro lanzamos un error 500 creo
+
+    Web:
+        Listar: 
+            GET: Devuelve todos
+            POST: ERROR 404
+        Añadir:
+            GET: Redirije a formulario
+            POST: Añade
+        Editar:
+            GET: Devuelve objeto
+            POST: Edita
+        Borrado:
+            GET: Error 404
+            POST: Borra
+        Ver:
+            GET: Devuelve objeto
+            POST: Error 404
+           

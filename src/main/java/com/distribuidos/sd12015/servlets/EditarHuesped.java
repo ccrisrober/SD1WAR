@@ -26,14 +26,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class EditarHuesped extends HttpServlet {
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,24 +35,21 @@ public class EditarHuesped extends HttpServlet {
             String huespedstr = GenericHttpServlet.sr.getHuesped(GenericHttpServlet.miStream.toXML(nif));
             Huesped h = (Huesped) GenericHttpServlet.miStream.fromXML(huespedstr);
             if (h == null) {
-                //throws;
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "Huesped no encontrado");
+                response.sendRedirect("./Huespeds");
+                return;
             }
             request.setAttribute("huesped", h);
             request.setAttribute("oldNIF", h.getNIF());
             request.getRequestDispatcher("WEB-INF/views/huespeds/edit.jsp").forward(request, response);
         } catch (NotFoundException ex) {
-            Logger.getLogger(EditarHuesped.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("error", true);
+            request.getSession().setAttribute("msg", "Huesped no encontrado");
+            response.sendRedirect("./Huespeds");
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,23 +57,23 @@ public class EditarHuesped extends HttpServlet {
         String name = request.getParameter("huesped.nombre");
         String surname = request.getParameter("huesped.apellidos");
         String NIF = request.getParameter("huesped.NIF");
-        List<String> errors = new LinkedList<String>();
-        if(name.length() < 3) {
+        List<String> errors = new LinkedList<>();
+        if (name.length() < 3) {
             errors.add("Mínimo 3 caracteres para nombre.");
         }
-        if(name.length() > 20) {
+        if (name.length() > 20) {
             errors.add("Máximo 20 caracteres para nombre.");
         }
-        if(surname.length() < 5) {
+        if (surname.length() < 5) {
             errors.add("Mínimo 5 caracteres para apellidos.");
         }
-        if(surname.length() > 30) {
+        if (surname.length() > 30) {
             errors.add("Máximo 30 caracteres para apellidos.");
         }
-        if(NIF.length() != 9) {
+        if (NIF.length() != 9) {
             errors.add("NIF de 9 caracteres.");
         }
-        if(!errors.isEmpty()) {
+        if (!errors.isEmpty()) {
             Huesped h = new Huesped(NIF, name, surname);
             request.setAttribute("huesped", h);
             request.setAttribute("oldNIF", request.getParameter("huesped.id"));
@@ -95,10 +84,12 @@ public class EditarHuesped extends HttpServlet {
 
             String editstr = GenericHttpServlet.sr.setHuesped(GenericHttpServlet.miStream.toXML(nh));
             ClaseConOk edit = (ClaseConOk) GenericHttpServlet.miStream.fromXML(editstr);
-            if(edit.isOk()) {
+            if (edit.isOk()) {
                 response.sendRedirect("./VerHuesped?NIF=" + NIF);
             } else {
-                // TODO: ERROR
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "No se ha podido editar.");
+                response.sendRedirect("./Huespeds");
             }
         }
     }

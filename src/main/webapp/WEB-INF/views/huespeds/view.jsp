@@ -10,7 +10,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap 3, from LayoutIt!</title>
+        <title>Ver huésped - ${huesped.NIF}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -79,7 +79,7 @@
                         </div>
                     </nav>
                     <h3>
-                        HUESPEDS
+                        Huésped ${huesped.NIF}
                     </h3>
                     <fieldset>
                         <dl class="dl-horizontal">

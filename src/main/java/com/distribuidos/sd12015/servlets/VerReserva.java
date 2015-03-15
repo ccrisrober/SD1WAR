@@ -36,20 +36,25 @@ public class VerReserva extends HttpServlet {
             String reservaStr = GenericHttpServlet.sr.getReserva(miStream.toXML(fn));
             Reserva r = (Reserva) GenericHttpServlet.miStream.fromXML(reservaStr);
             if (r == null) {
-                //throws;
+                request.getSession().setAttribute("error", true);
+                request.getSession().setAttribute("msg", "Reserva no encontrada");
+                response.sendRedirect("./Reservas");
             }
             request.setAttribute("reserva", r);
             request.getRequestDispatcher("WEB-INF/views/reservas/view.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(VerReserva.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(VerReserva.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("error", true);
+            request.getSession().setAttribute("msg", "Reserva no encontrada");
+            response.sendRedirect("./Reservas");
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 
 }
