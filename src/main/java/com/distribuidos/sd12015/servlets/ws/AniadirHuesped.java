@@ -87,14 +87,8 @@ public class AniadirHuesped extends HttpServlet {
             values.put(p, value);
         }
         try (PrintWriter out = response.getWriter()) {
-            String direccion = values.get(DIRECCION);
-            String localidad = values.get(LOCALIDAD);
-            String cpstr = values.get(CODIGOPOSTAL);
-            String provincia = values.get(PROVINCIA);
             Domicilio d = new Domicilio(values.get(DIRECCION), values.get(LOCALIDAD), Integer.parseInt(values.get(CODIGOPOSTAL)), values.get(PROVINCIA));
-            Huesped h = new Huesped(values.get(NIF), values.get(NOMBRE), values.get(APELLIDOS));
-            h.setDomicilio(d);
-            h.setNacimiento(ServicioREST.strToDate(values.get(NACIMIENTO)));
+            Huesped h = new Huesped(values.get(NIF), values.get(NOMBRE), values.get(APELLIDOS), ServicioREST.strToDate(values.get(NACIMIENTO)), d);
             String fijo = request.getParameter(TELEFONOFIJO);
             String movil = request.getParameter(TELEFONOMOVIL);
             String email = request.getParameter(EMAIL);

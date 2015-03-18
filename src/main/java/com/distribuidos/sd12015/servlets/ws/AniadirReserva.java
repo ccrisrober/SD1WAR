@@ -5,6 +5,8 @@
  */
 package com.distribuidos.sd12015.servlets.ws;
 
+import com.distribuidos.sd12015.data.ClaseConError;
+import com.distribuidos.sd12015.servlets.GenericHttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -29,7 +31,12 @@ public class AniadirReserva extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: error acceso
+        response.setContentType("text/xml;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            ClaseConError error = new ClaseConError(404, "La página no existe");
+            String errorStr = GenericHttpServlet.miStream.toXML(error);
+            out.append(errorStr);
+        }
     }
 
     @Override

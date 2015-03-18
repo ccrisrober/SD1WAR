@@ -5,6 +5,8 @@
  */
 package com.distribuidos.sd12015.models;
 
+import com.distribuidos.sd12015.rest.ServicioREST;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -12,12 +14,13 @@ import java.util.Date;
  * @author Cristian
  */
 public class Huesped {
+
     private String NIF;
     private String nombre;
     private String apellidos;
     private Date nacimiento;
     private Domicilio domicilio;
-    
+
     // Opcional
     private String telefonoFijo;
     private String telefonoMovil;
@@ -26,15 +29,20 @@ public class Huesped {
     public Huesped() {
         this(null, null, null);
     }
-    
+
     public Huesped(String NIF, String nombre, String apellidos) {
-        this(NIF, nombre, apellidos, null, null);
+        this(NIF, nombre, apellidos, null, new Domicilio());
+        try {
+            Date d = ServicioREST.strToDate("2015-03-03");
+            this.setNacimiento(d);
+        } catch (ParseException pe) {
+        }
     }
-    
+
     public Huesped(String NIF, String nombre, String apellidos, Date nacimiento) {
-        this(NIF, nombre, apellidos, nacimiento, null);
+        this(NIF, nombre, apellidos, nacimiento, new Domicilio());
     }
-    
+
     public Huesped(String NIF, String nombre, String apellidos, Date nacimiento, Domicilio domicilio) {
         this(NIF, nombre, apellidos, nacimiento, domicilio, "", "", "");
     }
