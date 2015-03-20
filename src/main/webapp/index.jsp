@@ -80,14 +80,14 @@
                     <h3>
                         Práctica 1 - Sistemas Distribuidos
                     </h3>
-                    <ul>
-                        <li>
-                            <a href="./Huespeds">Ver huespeds</a>
-                        </li>
-                        <li>
-                            <a href="./Reservas">Ver reservas</a>
-                        </li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a class="btn btn-info btn-lg btn-block" href="./Huespeds">Ver huespeds</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a class="btn btn-info btn-lg btn-block" href="./Reservas">Ver reservas</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

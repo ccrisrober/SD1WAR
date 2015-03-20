@@ -70,6 +70,8 @@ public class AniadirReserva extends HttpServlet {
         } catch (ParseException ex) {
             errors.add(ex.getMessage());
             errors.add("Error al convertir fechas");
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("WEB-INF/views/reservas/add.jsp").forward(request, response);
         }
     }
 }

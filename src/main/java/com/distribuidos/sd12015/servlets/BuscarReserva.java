@@ -49,7 +49,11 @@ public class BuscarReserva extends HttpServlet {
             request.setAttribute("reservas", reservas);
             request.getRequestDispatcher("WEB-INF/views/reservas/index.jsp").forward(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(BuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            request.getSession().setAttribute("ok", false);
+            request.getSession().setAttribute("msg", "Fecha de búsqueda incorrecta");
+        
+            request.setAttribute("huespeds", new LinkedList<Huesped>());
+            request.getRequestDispatcher("WEB-INF/views/reservas/index.jsp").forward(request, response);
         }
     }
 

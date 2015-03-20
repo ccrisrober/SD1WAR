@@ -149,9 +149,10 @@ public class ServicioREST {
     }
     
     public String setReserva(String xml) throws NotFoundException {
-        ClaseConOk ok = new ClaseConOk(false);
+        ClaseConOkYDuple ok = new ClaseConOkYDuple(false, null);
         ClaseConReservaYNif rn = (ClaseConReservaYNif) miStream.fromXML(xml);
         Duple d = new Duple<Date, String>(rn.getReserva().getFechaEntrada(), rn.getNif());
+        ok.setDuple(d);
         Reserva r = Hotel.reservas.get(d);
         if (r == null) {
             throw new NotFoundException("Reserva not found");

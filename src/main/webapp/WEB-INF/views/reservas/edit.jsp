@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +90,7 @@
                                 <ul>
                                     <c:forEach items="${errors}" var="e"> 
                                         <li>${e}</li>
-                                        </c:forEach>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </c:if>
@@ -97,10 +98,12 @@
                             <p>Huesped: 
                             <div class="form-group">
                                 <label for="reserva.NIF">Huesped: </label>
-                                <input type="hidden" name="reserva.oldNIF" value="${oldValue}" />
+                                <input type="hidden" name="oldNIF" value="${oldNIF}" />
+                                <input type="hidden" name="reserva.habitacion" value="${reserva.habitacion}" />
+                                no deja seleccionado el actual!!
                                 <select class="form-control" name="reserva.NIF">
                                     <c:forEach var="h" items="${huespeds}">
-                                        <option value="${h.NIF}"><c:out value="${h.nombre} ${h.apellidos}" /></option>
+                                        <option value="${h.NIF}" ${oldNIF == h.NIF ? 'selected="selected"' : ''}><c:out value="${h.nombre} ${h.apellidos}" /></option>
                                     </c:forEach>     
                                 </select>
                             </div>

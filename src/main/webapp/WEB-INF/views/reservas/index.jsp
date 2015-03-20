@@ -120,6 +120,7 @@
                                 <td>
                                     <form action="./EliminarReserva?NIF=${r.NIF}&fechaInicio=${formattedDate}" method="post">
                                         <input type="hidden" value="${h.NIF}" name="NIF" />
+                                        <input type="hidden" value="${h.fechaInicio}" name="fechaInicio" />
                                         <button type="submit" class="btn btn-success btn-danger btn-block">Eliminar</button>
                                     </form>
                                 </td>
@@ -145,5 +146,8 @@
                 </div>
             </div>
         </div>
+        <br/>
+        <hr/>
+        <footer class="text-center text-uppercase">Succionar culo TEAM &Theta;.&Theta;</footer>
     </body>
 </html>
