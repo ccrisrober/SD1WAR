@@ -34,9 +34,10 @@ public class Hotel {
             for(int i = 100; i < 600; i++) {
                 habitacionesDisponibles.add(i);
             }
+            habitacionesDisponibles.remove(101);
             Date di = ServicioREST.strToDate("2015-03-01");
             Date df = ServicioREST.strToDate("2015-03-02");
-            reservas.put(new Duple<Date, String>(di, "12345678A"), new Reserva("12345678A", getRandomHabitacion(), di, df));
+            reservas.put(new Duple<Date, String>(di, "12345678A"), new Reserva("12345678A", 101, di, df));
 
         } catch (ParseException ex) {
             Logger.getLogger(Hotel.class.getName()).log(Level.SEVERE, null, ex);

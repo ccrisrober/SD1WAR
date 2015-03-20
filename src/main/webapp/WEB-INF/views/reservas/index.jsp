@@ -127,6 +127,21 @@
                             </c:forEach>
                     </table>
                     <a href='./AniadirReserva' class="btn btn-success btn-default btn-block">Añadir nuevo</a>
+                    <br/>
+                    <hr/>
+                    <h2>Buscar</h2>
+                    <form class="form-horizontal" action="./BuscarReserva" method="GET">
+                        <div class="form-group">
+                            <div class="">
+                                <label for="value" class="col-sm-4 control-label">Valor: </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="value" />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default btn-default btn-block">Buscar</button>
+                        <a href="./Reservas" class="btn btn-warning btn-default btn-block">Reset</a>
+                    </form>
                 </div>
             </div>
         </div>
