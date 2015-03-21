@@ -27,13 +27,13 @@ public class Huesped {
     private String email;
 
     public Huesped() {
-        this(null, null, null);
+        this("", "", "");
     }
 
     public Huesped(String NIF, String nombre, String apellidos) {
         this(NIF, nombre, apellidos, null, new Domicilio());
         try {
-            Date d = ServicioREST.strToDate("2015-03-03");
+            Date d = ServicioREST.strToDate("2015-21-03");
             this.setNacimiento(d);
         } catch (ParseException pe) {
         }

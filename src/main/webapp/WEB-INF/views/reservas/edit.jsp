@@ -101,7 +101,7 @@
                                 <input type="hidden" name="oldNIF" value="${oldNIF}" />
                                 <input type="hidden" name="reserva.habitacion" value="${reserva.habitacion}" />
                                 no deja seleccionado el actual!!
-                                <select class="form-control" name="reserva.NIF">
+                                <select class="form-control" name="reserva.NIF" required>
                                     <c:forEach var="h" items="${huespeds}">
                                         <option value="${h.NIF}" ${oldNIF == h.NIF ? 'selected="selected"' : ''}><c:out value="${h.nombre} ${h.apellidos}" /></option>
                                     </c:forEach>     
@@ -109,11 +109,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="reserva.fechaEntrada">Fecha Entrada: </label>
-                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${formattedDate}' />
+                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${formattedDate}' required />
                             </div>
                             <div class="form-group">
                                 <label for="reserva.fechaSalida">Fecha Salida: </label>
-                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${formattedDate2}' />
+                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${formattedDate2}' required />
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </fieldset>

@@ -101,6 +101,54 @@
                             <dd>
                                 ${huesped.NIF}
                             </dd>
+                            <dt>
+                            Fecha Nacimiento:
+                            </dt>
+                            <dd>
+                                ${huesped.nacimiento}
+                            </dd>
+                            <dt>
+                            Dirección:
+                            </dt>
+                            <dd>
+                                ${huesped.domicilio.direccion}
+                            </dd>
+                            <dt>
+                            Localidad:
+                            </dt>
+                            <dd>
+                                ${huesped.domicilio.localidad}
+                            </dd>
+                            <dt>
+                            Provincia:
+                            </dt>
+                            <dd>
+                                ${huesped.domicilio.provincia}
+                            </dd>
+                            <dt>
+                            Código Postal:
+                            </dt>
+                            <dd>
+                                ${huesped.domicilio.codigoPostal}
+                            </dd>
+                            <dt>
+                            Teléfono Fijo:
+                            </dt>
+                            <dd>
+                                ${huesped.telefonoFijo}
+                            </dd>
+                            <dt>
+                            Teléfono Móvil:
+                            </dt>
+                            <dd>
+                                ${huesped.telefonoMovil}
+                            </dd>
+                            <dt>
+                            Email:
+                            </dt>
+                            <dd>
+                                ${huesped.email}
+                            </dd>
                         </dl>
                     </fieldset>
                 </div>

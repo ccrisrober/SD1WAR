@@ -81,30 +81,92 @@
                         Añadir nuevo huésped
                     </h3>
 
-                    <form method='POST' action='' role="form">
+                    <form method='POST' action='' role="form" class="form-horizontal">
 
                         <c:if test="${errors != null}">
                             <div class="alert alert-dismissable alert-warning">
                                 <ul>
                                     <c:forEach items="${errors}" var="e"> 
                                         <li>${e}</li>
-                                    </c:forEach>
+                                        </c:forEach>
                                 </ul>
                             </div>
                         </c:if>
                         <fieldset>
                             <input type="hidden" name="huesped.id" value='${oldNIF}' />
                             <div class="form-group">
-                                <label for="huesped.NIF">NIF: </label>
-                                <input type="text" class="form-control" name="huesped.NIF" value='${huesped.NIF}' />
+                                <label for="huesped.NIF" class="col-sm-2 control-label">NIF: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.NIF" value='${huesped.NIF}' required />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="huesped.nombre">Nombre:</label>
-                                <input type="text" class="form-control" name="huesped.nombre" value='${huesped.nombre}' />
+                                <label for="huesped.nombre" class="col-sm-2 control-label">Nombre:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.nombre" value='${huesped.nombre}' required />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="huesped.apellidos">Apellidos: </label>
-                                <input type="text" class="form-control" name="huesped.apellidos" value='${huesped.apellidos}' />
+                                <label for="huesped.apellidos" class="col-sm-2 control-label">Apellidos: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="huesped.apellidos" value='${huesped.apellidos}' required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="huesped.apellidos" class="col-sm-2 control-label">Fecha de nacimiento: </label>
+                                <div class="col-sm-10">
+                                    <input type='date' name='huesped.fechaNacimiento' value='${huesped.nacimiento}' required /></p>
+                                </div>
+                            </div>
+                            <div class="form-group" title="Domicilio">
+                                <div class="form-group">
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Dirección: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.direccion" value='${huesped.domicilio.direccion}' required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Localidad: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.localidad" value='${huesped.domicilio.localidad}' required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Provincia: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.provincia" value='${huesped.domicilio.provincia}' required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="huesped.apellidos" class="col-sm-2 control-label">Código postal: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="huesped.codigoPostal" value='${huesped.domicilio.codigoPostal}' required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <br/>
+                                <h4>Datos opcionales</h4>
+                                <div class="form-group" title="Opcional">
+                                    <div class="form-group">
+                                        <label for="huesped.telefonoFijo" class="col-sm-2 control-label">Teléfono Fijo: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="huesped.telefonoFijo" value='${huesped.telefonoFijo}' />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="huesped.telefonoMovil" class="col-sm-2 control-label">Teléfono Móvil: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="huesped.telefonoMovil" value='${huesped.telefonoMovil}' />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="huesped.email" class="col-sm-2 control-label">Email: </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" name="huesped.email" value='${huesped.email}' />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </fieldset>

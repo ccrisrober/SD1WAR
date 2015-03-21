@@ -95,7 +95,7 @@
                             <p>Huesped: 
                             <div class="form-group">
                                 <label for="reserva.NIF">Huesped: </label>
-                                <select class="form-control" name="reserva.NIF">
+                                <select class="form-control" name="reserva.NIF" required>
                                     <c:forEach var="h" items="${huespeds}">
                                         <option value="${h.NIF}"><c:out value="${h.nombre} ${h.apellidos}" /></option>
                                     </c:forEach>     
@@ -103,11 +103,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="reserva.fechaEntrada">Fecha Entrada: </label>
-                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${reserva.fechaEntrada}' />
+                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${reserva.fechaEntrada}' required />
                             </div>
                             <div class="form-group">
                                 <label for="reserva.fechaSalida">Fecha Salida: </label>
-                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${reserva.fechaSalida}' />
+                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${reserva.fechaSalida}' required />
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </fieldset>
