@@ -87,7 +87,11 @@ public class EditarReserva extends HttpServlet {
             String setReserva = sr.setReserva(miStream.toXML(rn));
             out.write(setReserva);
         } catch (ParseException | NotFoundException ex) {
-            Logger.getLogger(EditarHuesped.class.getName()).log(Level.SEVERE, null, ex);
+            try (PrintWriter out = response.getWriter()) {
+                ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
+                String errorStr = GenericHttpServlet.miStream.toXML(error);
+                out.append(errorStr);
+            }
         }
     }
 }

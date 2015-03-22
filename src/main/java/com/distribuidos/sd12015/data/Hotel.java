@@ -25,19 +25,19 @@ import java.util.logging.Logger;
  */
 public class Hotel {
     public static Map<String, Huesped> huespeds = new HashMap<String, Huesped>();
-    public static Map<Duple<Date, String>, Reserva> reservas = new HashMap<Duple<Date, String>, Reserva>();
+    public static Map<Duple, Reserva> reservas = new HashMap<Duple, Reserva>();
     public static List<Integer> habitacionesDisponibles = new LinkedList<Integer>();
     private static Random random = new Random();
     static {
         try {huespeds.put("12345678A", new Huesped("12345678A", "José", "Pérez Pérez"));
-            huespeds.put("12345678B", new Huesped("12345678B", "Andrés", "Pérez Pérez"));
+            huespeds.put("ABCDEFGHI", new Huesped("ABCDEFGHI", "Andrés", "Pérez Pérez"));
             for(int i = 100; i < 600; i++) {
                 habitacionesDisponibles.add(i);
             }
             habitacionesDisponibles.remove(101);
             Date di = ServicioREST.strToDate("2015-03-01");
             Date df = ServicioREST.strToDate("2015-03-02");
-            reservas.put(new Duple<Date, String>(di, "12345678A"), new Reserva("12345678A", 101, di, df));
+            reservas.put(new Duple(di, "12345678A"), new Reserva("12345678A", 101, di, df));
 
         } catch (ParseException ex) {
             Logger.getLogger(Hotel.class.getName()).log(Level.SEVERE, null, ex);

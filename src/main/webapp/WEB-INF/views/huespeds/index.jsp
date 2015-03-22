@@ -104,7 +104,7 @@
                         </tr>
                         <c:set var="index" value="0" />
                         <c:forEach var="h" items="${huespeds}">
-                            <tr class="active">
+                            <tr>
                                 <td>${h.NIF}</td>
                                 <td>${h.nombre}</td>
                                 <td>${h.apellidos}</td>

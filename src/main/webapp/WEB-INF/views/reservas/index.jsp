@@ -112,9 +112,6 @@
                                 <td>${r.habitacion}</td>
                                 <td>${formattedDate}</td>
                                 <td>${formattedDate2}</td>
-                                
-                                <td>${formattedDate}</td>
-                                <td>${formattedDate2}</td>
                                 <td><a class="btn btn-success btn-info btn-block" href='./VerReserva?NIF=${r.NIF}&fechaInicio=${formattedDate}'>Ver</td>
                                 <td><a class="btn btn-success btn-warning btn-block" href='./EditarReserva?NIF=${r.NIF}&fechaInicio=${formattedDate}'>Editar</td>
                                 <td>
@@ -146,8 +143,5 @@
                 </div>
             </div>
         </div>
-        <br/>
-        <hr/>
-        <footer class="text-center text-uppercase">Succionar culo TEAM &Theta;.&Theta;</footer>
     </body>
 </html>

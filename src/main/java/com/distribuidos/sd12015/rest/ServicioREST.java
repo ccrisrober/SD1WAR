@@ -140,7 +140,7 @@ public class ServicioREST {
     
     public String getReserva(String xml) throws NotFoundException {
         ClaseConFechaYNif fn = (ClaseConFechaYNif) miStream.fromXML(xml);
-        Duple<Date, String> d = new Duple<Date, String>(fn.getDate(), fn.getNif());
+        Duple d = new Duple(fn.getDate(), fn.getNif());
         Reserva r = Hotel.reservas.get(d);
         if (r == null) {
             throw new NotFoundException("Reserva not found");
@@ -152,14 +152,15 @@ public class ServicioREST {
     public String setReserva(String xml) throws NotFoundException {
         ClaseConOkYDuple ok = new ClaseConOkYDuple(false, null);
         ClaseConReservaYNif rn = (ClaseConReservaYNif) miStream.fromXML(xml);
-        Duple d = new Duple<Date, String>(rn.getReserva().getFechaEntrada(), rn.getNif());
+        Duple d = new Duple(rn.getReserva().getFechaEntrada(), rn.getNif());
         ok.setDuple(d);
-        Reserva r = Hotel.reservas.get(d);
+        Reserva r = Hotel.reservas.remove(d);
         if (r == null) {
             throw new NotFoundException("Reserva not found");
         }
+        d.setF(rn.getReserva().getNIF());
         Reserva put = Hotel.reservas.put(d, rn.getReserva());        
-        if (put != null) {
+        if (put == null) {
             ok.setOk(true);
         }
         String str = miStream.toXML(ok);
@@ -169,7 +170,7 @@ public class ServicioREST {
     public String deleteReserva(String xml) {
         ClaseConOk ok = new ClaseConOk(false);
         ClaseConFechaYNif fn = (ClaseConFechaYNif) miStream.fromXML(xml);
-        Reserva remove = Hotel.reservas.remove(new Duple<Date, String>(fn.getDate(), fn.getNif()));
+        Reserva remove = Hotel.reservas.remove(new Duple(fn.getDate(), fn.getNif()));
         ok.setOk(remove != null);
         String str = miStream.toXML(ok);
         return str;
@@ -196,9 +197,8 @@ public class ServicioREST {
         if (hab < 0) {
             dateOk.setOk(false);
         }
-        // Si queremos ser más rigurosos, hace falta comprobar más cosas como que no pisa algo anterior o tal!
         Reserva reserva = new Reserva(fesn.getNif(), hab, fesn.getFechaEntrada(), fesn.getFechaSalida());
-        Duple<Date, String> d = new Duple<Date, String>(fesn.getFechaEntrada(), fesn.getNif());
+        Duple d = new Duple(fesn.getFechaEntrada(), fesn.getNif());
         Hotel.reservas.put(d, reserva);
         dateOk.setDuple(d);
         String str = miStream.toXML(dateOk);
