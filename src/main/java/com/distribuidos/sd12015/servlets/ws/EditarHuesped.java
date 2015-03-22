@@ -6,17 +6,15 @@
 package com.distribuidos.sd12015.servlets.ws;
 
 import com.distribuidos.sd12015.data.ClaseConError;
-import com.distribuidos.sd12015.data.ClaseConReservaYNif;
-import com.distribuidos.sd12015.exceptions.NotFoundException;
-import com.distribuidos.sd12015.models.Reserva;
+import com.distribuidos.sd12015.data.ClaseConNifYHuesped;
+import com.distribuidos.sd12015.models.Domicilio;
+import com.distribuidos.sd12015.models.Huesped;
 import com.distribuidos.sd12015.rest.ServicioREST;
 import com.distribuidos.sd12015.servlets.GenericHttpServlet;
-import static com.distribuidos.sd12015.servlets.GenericHttpServlet.miStream;
 import static com.distribuidos.sd12015.servlets.GenericHttpServlet.sr;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,25 +33,44 @@ import javax.servlet.http.HttpServletResponse;
 public class EditarHuesped extends HttpServlet {
 
     protected static List<String> params;
-    protected static final String OLDNIF = "reserva.oldNIF";
-    protected static final String NIF = "reserva.NIF";
-    protected static final String HABITACION = "reserva.HABITACION";
-    protected static final String FECHAIN = "reserva.FECHAIN";
-    protected static final String FECHAOUT = "reserva.FECHAOUT";
+    protected static final String OLDNIF = "huesped.oldNIF";
+    protected static final String NIF = "huesped.NIF";
+    protected static final String NOMBRE = "huesped.nombre";
+    protected static final String APELLIDOS = "huesped.apellidos";
+    protected static final String NACIMIENTO = "huesped.nacimiento";
+
+    protected static final String DIRECCION = "huesped.domicilio.direccion";
+    protected static final String LOCALIDAD = "huesped.domicilio.localidad";
+    protected static final String CODIGOPOSTAL = "huesped.domicilio.codigoPostal";
+    protected static final String PROVINCIA = "huesped.domicilio.provincia";
+
+    protected static final String TELEFONOFIJO = "huesped.telefonoFijo";
+    protected static final String TELEFONOMOVIL = "huesped.telefonoMovil";
+    protected static final String EMAIL = "huesped.email";
 
     static {
         params = new LinkedList<>();
-        params.add(NIF);
         params.add(OLDNIF);
-        params.add(HABITACION);
-        params.add(FECHAIN);
-        params.add(FECHAOUT);
+        params.add(NIF);
+        params.add(NOMBRE);
+        params.add(APELLIDOS);
+
+        params.add(NACIMIENTO);
+        params.add(DIRECCION);
+        params.add(LOCALIDAD);
+        params.add(CODIGOPOSTAL);
+        params.add(PROVINCIA);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: error acceso
+        response.setContentType("text/xml;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            ClaseConError error = new ClaseConError(404, "La página no existe");
+            String errorStr = GenericHttpServlet.miStream.toXML(error);
+            out.append(errorStr);
+        }
     }
 
     @Override
@@ -75,16 +92,25 @@ public class EditarHuesped extends HttpServlet {
         }
 
         try (PrintWriter out = response.getWriter()) {
-            int hab = Integer.parseInt(values.get(HABITACION));
-            Date fin = ServicioREST.strToDate(values.get(FECHAIN));
-            Date fout = ServicioREST.strToDate(values.get(FECHAOUT));
-            ClaseConReservaYNif rn = new ClaseConReservaYNif(new Reserva(values.get(NIF), hab, fin, fout), values.get(OLDNIF));
-            String setReserva = sr.setReserva(miStream.toXML(rn));
-            out.write(setReserva);
+            Domicilio d = new Domicilio(values.get(DIRECCION), values.get(LOCALIDAD), Integer.parseInt(values.get(CODIGOPOSTAL)), values.get(PROVINCIA));
+            Huesped h = new Huesped(values.get(NIF), values.get(NOMBRE), values.get(APELLIDOS), ServicioREST.strToDate(values.get(NACIMIENTO)), d);
+            String fijo = request.getParameter(TELEFONOFIJO);
+            String movil = request.getParameter(TELEFONOMOVIL);
+            String email = request.getParameter(EMAIL);
+            if (!fijo.isEmpty()) {
+                h.setTelefonoFijo(request.getParameter(TELEFONOFIJO));
+            }
+            if (!movil.isEmpty()) {
+                h.setTelefonoMovil(request.getParameter(TELEFONOMOVIL));
+            }
+            if (!email.isEmpty()) {
+                h.setEmail(request.getParameter(EMAIL));
+            }
+            ClaseConNifYHuesped nh = new ClaseConNifYHuesped(values.get(OLDNIF), h);
+            String editstr = sr.setHuesped(GenericHttpServlet.miStream.toXML(nh));
+            out.append(editstr);
         } catch (ParseException ex) {
-            Logger.getLogger(EditarHuesped.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotFoundException ex) {
-            Logger.getLogger(EditarHuesped.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AniadirHuesped.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

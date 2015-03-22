@@ -19,22 +19,24 @@ import javax.servlet.http.HttpServletResponse;
  * @author Cristian
  */
 public class Reservas extends HttpServlet {
-@Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String reservasStr = GenericHttpServlet.sr.getReservas();
-        
+
         response.setContentType("text/xml;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.append(reservasStr);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/xml;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ClaseConError error = new ClaseConError(404,"La página no existe");
+            ClaseConError error = new ClaseConError(404, "La página no existe");
             String errorStr = GenericHttpServlet.miStream.toXML(error);
             out.append(errorStr);
         }

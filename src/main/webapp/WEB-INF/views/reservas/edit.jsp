@@ -9,9 +9,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+    <fmt:formatDate value="${reserva.fechaEntrada}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
+    <fmt:formatDate value="${reserva.fechaSalida}" var="formattedDate2" type="date" pattern="yyyy-MM-dd" />
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap 3, from LayoutIt!</title>
+        <title>Editar Reserva ~ ${reserva.NIF} - ${formattedDate}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -79,8 +81,6 @@
                             </ul>
                         </div>
                     </nav>
-                    <fmt:formatDate value="${reserva.fechaEntrada}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
-                    <fmt:formatDate value="${reserva.fechaSalida}" var="formattedDate2" type="date" pattern="yyyy-MM-dd" />
                     <h3>
                         Editar reserva
                     </h3>
@@ -115,7 +115,7 @@
                                 <label for="reserva.fechaSalida">Fecha Salida: </label>
                                 <input type="date" class="form-control" name="reserva.fechaSalida" value='${formattedDate2}' required />
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">Editar</button>
                         </fieldset>
                     </form>
                 </div>

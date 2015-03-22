@@ -7,15 +7,12 @@ package com.distribuidos.sd12015.servlets.ws;
 
 import com.distribuidos.sd12015.data.ClaseConError;
 import com.distribuidos.sd12015.data.ClaseConFechaYNif;
-import com.distribuidos.sd12015.data.ClaseConNif;
 import com.distribuidos.sd12015.exceptions.NotFoundException;
 import com.distribuidos.sd12015.rest.ServicioREST;
 import com.distribuidos.sd12015.servlets.GenericHttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -7,7 +7,6 @@ package com.distribuidos.sd12015.servlets.ws;
 
 import com.distribuidos.sd12015.data.ClaseConError;
 import com.distribuidos.sd12015.data.ClaseConFechaEntradaYSalidaYNif;
-import com.distribuidos.sd12015.data.ClaseConOkYDuple;
 import com.distribuidos.sd12015.rest.ServicioREST;
 import com.distribuidos.sd12015.servlets.GenericHttpServlet;
 import java.io.IOException;
@@ -18,8 +17,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +31,7 @@ public class AniadirReserva extends HttpServlet {
     protected static List<String> params;
     protected static final String NIF = "reserva.NIF";
     protected static final String FECHAINICIO = "reserva.fechaInicio";
-    protected static final String FECHAFIN = "reserva.fechaFin";
+    protected static final String FECHAFIN = "reserva.fechaSalida";
 
     static {
         params = new LinkedList<>();
@@ -88,7 +85,7 @@ public class AniadirReserva extends HttpServlet {
                 out.write(GenericHttpServlet.miStream.toXML(error));
                 return;
             }
-            ClaseConFechaEntradaYSalidaYNif fesn = new ClaseConFechaEntradaYSalidaYNif(NIF, d1, d2);
+            ClaseConFechaEntradaYSalidaYNif fesn = new ClaseConFechaEntradaYSalidaYNif(values.get(NIF), d1, d2);
             String addstr = GenericHttpServlet.sr.addReserva(GenericHttpServlet.miStream.toXML(fesn));
             out.write(addstr);
         }

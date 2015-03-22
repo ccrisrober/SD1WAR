@@ -11,7 +11,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap 3, from LayoutIt!</title>
+        <title>Listado Reservas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -106,15 +106,15 @@
                         </tr>
                         <c:forEach var="r" items="${reservas}">
                             <tr>
+                                <fmt:formatDate value="${r.fechaEntrada}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
+                                <fmt:formatDate value="${r.fechaSalida}" var="formattedDate2" type="date" pattern="yyyy-MM-dd" />
                                 <td>${r.NIF}</td>
                                 <td>${r.habitacion}</td>
-                                <td>${r.fechaEntrada}</td>
-                                <td>${r.fechaSalida}</td>
-                                <fmt:formatDate value="${r.fechaEntrada}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
-                                <!--<fmt:formatDate value="${r.fechaSalida}" var="formattedDate2" type="date" pattern="yyyy-MM-dd" />
+                                <td>${formattedDate}</td>
+                                <td>${formattedDate2}</td>
                                 
                                 <td>${formattedDate}</td>
-                                <td>${formattedDate2}</td>-->
+                                <td>${formattedDate2}</td>
                                 <td><a class="btn btn-success btn-info btn-block" href='./VerReserva?NIF=${r.NIF}&fechaInicio=${formattedDate}'>Ver</td>
                                 <td><a class="btn btn-success btn-warning btn-block" href='./EditarReserva?NIF=${r.NIF}&fechaInicio=${formattedDate}'>Editar</td>
                                 <td>

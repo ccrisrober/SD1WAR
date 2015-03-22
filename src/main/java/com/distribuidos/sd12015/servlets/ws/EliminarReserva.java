@@ -7,7 +7,6 @@ package com.distribuidos.sd12015.servlets.ws;
 
 import com.distribuidos.sd12015.data.ClaseConError;
 import com.distribuidos.sd12015.data.ClaseConFechaYNif;
-import com.distribuidos.sd12015.data.ClaseConNif;
 import com.distribuidos.sd12015.rest.ServicioREST;
 import com.distribuidos.sd12015.servlets.GenericHttpServlet;
 import java.io.IOException;
@@ -17,8 +16,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -70,7 +67,7 @@ public class EliminarReserva extends HttpServlet {
         }
 
         try (PrintWriter out = response.getWriter()) {
-            ClaseConFechaYNif fn = new ClaseConFechaYNif(ServicioREST.strToDate(values.get(FECHA_INICIO)), 
+            ClaseConFechaYNif fn = new ClaseConFechaYNif(ServicioREST.strToDate(values.get(FECHA_INICIO)),
                     values.get(NIF));
             String okstr = GenericHttpServlet.sr.deleteReserva(GenericHttpServlet.miStream.toXML(fn));
             out.append(okstr);

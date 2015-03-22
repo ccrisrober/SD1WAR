@@ -4,6 +4,7 @@
     Author     : Cristian
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +116,8 @@
                             <div class="form-group">
                                 <label for="huesped.apellidos" class="col-sm-2 control-label">Fecha de nacimiento: </label>
                                 <div class="col-sm-10">
-                                    <input type='date' name='huesped.fechaNacimiento' value='${huesped.nacimiento}' required /></p>
+                                    <fmt:formatDate value="${huesped.nacimiento}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
+                                    <input type='date' name='huesped.fechaNacimiento' value='${formattedDate}' required /></p>
                                 </div>
                             </div>
                             <div class="form-group" title="Domicilio">
@@ -168,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">Editar</button>
                         </fieldset>
                     </form>
                 </div>

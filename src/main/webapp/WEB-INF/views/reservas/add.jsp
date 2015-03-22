@@ -5,12 +5,13 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap 3, from LayoutIt!</title>
+        <title>Añadir Reserva</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -101,15 +102,17 @@
                                     </c:forEach>     
                                 </select>
                             </div>
+                            <fmt:formatDate value="${r.fechaEntrada}" var="formattedDate" type="date" pattern="yyyy-MM-dd" />
+                            <fmt:formatDate value="${r.fechaSalida}" var="formattedDate2" type="date" pattern="yyyy-MM-dd" />
                             <div class="form-group">
                                 <label for="reserva.fechaEntrada">Fecha Entrada: </label>
-                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${reserva.fechaEntrada}' required />
+                                <input type="date" class="form-control" name="reserva.fechaEntrada" value='${formattedDate}' required />
                             </div>
                             <div class="form-group">
                                 <label for="reserva.fechaSalida">Fecha Salida: </label>
-                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${reserva.fechaSalida}' required />
+                                <input type="date" class="form-control" name="reserva.fechaSalida" value='${formattedDate2}' required />
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">Añadir</button>
                         </fieldset>
                     </form>
                 </div>
