@@ -33,7 +33,7 @@ public class VerReserva extends HttpServlet {
             String nif = request.getParameter("NIF");
             if (nif == null) {
                 try (PrintWriter out = response.getWriter()) {
-                    ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
+                    ClaseConError error = new ClaseConError(401, "No estás autorizado para ver esta página");
                     String errorStr = GenericHttpServlet.miStream.toXML(error);
                     out.append(errorStr);
                 }

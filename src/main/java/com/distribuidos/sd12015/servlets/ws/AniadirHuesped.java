@@ -78,7 +78,7 @@ public class AniadirHuesped extends HttpServlet {
             String value = request.getParameter(p);
             if (value == null || value.isEmpty()) {
                 try (PrintWriter out = response.getWriter()) {
-                    ClaseConError error = new ClaseConError(500, "Servicio no encontrado");
+                    ClaseConError error = new ClaseConError(401, "No estás autorizado para ver esta página");
                     String errorStr = GenericHttpServlet.miStream.toXML(error);
                     out.append(errorStr);
                 }

@@ -26,7 +26,16 @@ public class VerHuesped extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            ClaseConNif nif = new ClaseConNif(request.getParameter("NIF"));
+            String nif_ = request.getParameter("NIF");
+            if (nif_ == null) {
+                try (PrintWriter out = response.getWriter()) {
+                    ClaseConError error = new ClaseConError(401, "No estás autorizado para ver esta página");
+                    String errorStr = GenericHttpServlet.miStream.toXML(error);
+                    out.append(errorStr);
+                }
+                return;
+            }
+            ClaseConNif nif = new ClaseConNif(nif_);
             String huespedStr = GenericHttpServlet.sr.getHuesped(GenericHttpServlet.miStream.toXML(nif));
             String header = request.getHeader("Accept");
             response.setContentType("text/xml;charset=UTF-8");

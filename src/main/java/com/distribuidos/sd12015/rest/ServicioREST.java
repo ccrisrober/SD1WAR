@@ -43,19 +43,27 @@ public class ServicioREST {
         return instance;
     }
     
+    /**
+     * Retorna una lista con todos los huéspeds. Vacía si no hay huéspeds
+     * @return Lista de huéspeds
+     */
     public String getHuespeds() {
-        List<Huesped> l = new LinkedList<Huesped>();
+        List<Huesped> l = new LinkedList<>();
         for (Huesped h : Hotel.huespeds.values()) {
             l.add(h);
         }
         String str = miStream.toXML(l);
-        /*return miStream.toXML(l);*/
         return str;
     }
     
+    /**
+     * Busca huéspeds que contienen como nombre el dado.
+     * @param xml ClaseConNombre serializado
+     * @return Lista de huéspeds
+     */
     public String findByName(String xml) {
         ClaseConNombre o = (ClaseConNombre) miStream.fromXML(xml);
-        List<Huesped> l = new LinkedList<Huesped>();
+        List<Huesped> l = new LinkedList<>();
         for (Huesped h : Hotel.huespeds.values()) {
             if (h.getNombre().contains(o.getNombre())) {
                 l.add(h);
@@ -65,9 +73,14 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Busca huéspeds cuyo apellido contiene el dado.
+     * @param xml ClaseConApellido serializado
+     * @return Lista de huéspeds
+     */
     public String findByApellidos(String xml) {
         ClaseConApellido o = (ClaseConApellido) miStream.fromXML(xml);
-        List<Huesped> l = new LinkedList<Huesped>();
+        List<Huesped> l = new LinkedList<>();
         for (Huesped h : Hotel.huespeds.values()) {
             if (h.getApellidos().contains(o.getApellido())) {
                 l.add(h);
@@ -77,6 +90,12 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Añade un huésped a la "base de datos"
+     * @param xml Huésped serializado
+     * @return ClaseConOk. Retorna true si se ha guardado. False en caso 
+     *      contrario.
+     */
     public String addHuesped(String xml) {
         Huesped h = (Huesped) miStream.fromXML(xml);
         ClaseConOk ok = new ClaseConOk(false);
@@ -87,6 +106,14 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Obtiene un huésped a la "base de datos"
+     * @param xml ClaseConNif con el nif a buscar serializada
+     * @return 
+     *      - Si el huésped no existe, se lanza una excepción NotFoundException
+     *      - Si el huésped existe, se devuelve un objeto Huésped
+     * @throws com.distribuidos.sd12015.exceptions.NotFoundException
+     */
     public String getHuesped(String xml) throws NotFoundException {
         ClaseConNif nif = (ClaseConNif) miStream.fromXML(xml);
         Huesped h = Hotel.huespeds.get(nif.getNif());
@@ -97,6 +124,13 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Edita un huésped en la "base de datos"
+     * @param xml ClaseConNifYHuesped que contiene el viejo nif y el nuevo 
+     *      huésped editado serializado
+     * @return ClaseConOk. El interior de esta clase contiene si se ha editado 
+     *      con éxito o no.
+     */
     public String setHuesped(String xml) {
         ClaseConOk ok = new ClaseConOk(false);
         ClaseConNifYHuesped nh = (ClaseConNifYHuesped) miStream.fromXML(xml);
@@ -108,6 +142,12 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Remueve un huésped de la "base de datos"
+     * @param xml ClaseConNif con el NIF del huésped serializado
+     * @return ClaseConOk. En su interior se encuentra un booleano que 
+     *      determina si se ha borrado o no
+     */
     public String removeHuesped(String xml) {
         ClaseConOk ok = new ClaseConOk(false);
         ClaseConNif nif = (ClaseConNif) miStream.fromXML(xml);
@@ -117,8 +157,12 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Retorna una lista con todas las reservas. Vacía si no hay reservas.
+     * @return Lista de reservas
+     */
     public String getReservas() {
-        List<Reserva> l = new LinkedList<Reserva>();
+        List<Reserva> l = new LinkedList<>();
         for (Reserva r : Hotel.reservas.values()) {
             l.add(r);
         }
@@ -126,9 +170,14 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Busca reservas que que concuerden con la fecha de entrada pasada.
+     * @param xml ClaseConFecha serializado
+     * @return Lista de reservas
+     */
     public String findByFechaEntrada(String xml) {
         ClaseConFecha fecha = (ClaseConFecha) miStream.fromXML(xml);
-        List<Reserva> l = new LinkedList<Reserva>();
+        List<Reserva> l = new LinkedList<>();
         for (Reserva r : Hotel.reservas.values()) {
             if (r.getFechaEntrada().compareTo(fecha.getDate()) == 0) {
                 l.add(r);
@@ -138,6 +187,14 @@ public class ServicioREST {
         return str;
     }
     
+   /**
+     * Obtiene una reserva a la "base de datos"
+     * @param xml ClaseConFechaYNif con el nif y fecha de entrada a buscar serializada
+     * @return 
+     *      - Si la reserva no existe, se lanza una excepción NotFoundException
+     *      - Si la reserva existe, se devuelve un objeto Reserva
+     * @throws com.distribuidos.sd12015.exceptions.NotFoundException
+     */
     public String getReserva(String xml) throws NotFoundException {
         ClaseConFechaYNif fn = (ClaseConFechaYNif) miStream.fromXML(xml);
         Duple d = new Duple(fn.getDate(), fn.getNif());
@@ -149,6 +206,14 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Edita una reserva en la "base de datos"
+     * @param xml ClaseConReservaYNif que contiene el viejo nif y la nueva 
+     *      reserva editada serializado
+     * @return ClaseConOk. El interior de esta clase contiene si se ha editado 
+     *      con éxito o no.
+     * @throws com.distribuidos.sd12015.exceptions.NotFoundException
+     */
     public String setReserva(String xml) throws NotFoundException {
         ClaseConOkYDuple ok = new ClaseConOkYDuple(false, null);
         ClaseConReservaYNif rn = (ClaseConReservaYNif) miStream.fromXML(xml);
@@ -167,6 +232,13 @@ public class ServicioREST {
         return str;
     }
     
+    /**
+     * Remueve una reserva de la "base de datos"
+     * @param xml ClaseConFechaYNif con el NIF y fecha de entrada de la reserva 
+     *      serializado
+     * @return ClaseConOk. En su interior se encuentra un booleano que 
+     *      determina si se ha borrado o no
+     */
     public String deleteReserva(String xml) {
         ClaseConOk ok = new ClaseConOk(false);
         ClaseConFechaYNif fn = (ClaseConFechaYNif) miStream.fromXML(xml);
@@ -176,7 +248,7 @@ public class ServicioREST {
         return str;
     }
     
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     public static Date strToDate(String str) throws ParseException {
         return format.parse(str);
@@ -186,6 +258,12 @@ public class ServicioREST {
         return format.format(date);
     }
     
+    /**
+     * Añade una reserva a la "base de datos"
+     * @param xml Reserva serializada
+     * @return ClaseConOk. Retorna true si se ha guardado. False en caso 
+     *      contrario.
+     */
     public String addReserva(String xml) {
         ClaseConOkYDuple dateOk = new ClaseConOkYDuple(true, null);
         ClaseConFechaEntradaYSalidaYNif fesn = (ClaseConFechaEntradaYSalidaYNif) miStream.fromXML(xml);

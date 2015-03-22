@@ -29,7 +29,6 @@ public class VerReserva extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // TODO: Controlar los errores
             response.setContentType("text/html;charset=UTF-8");
             ClaseConFechaYNif fn = new ClaseConFechaYNif(ServicioREST.strToDate(request.getParameter("fechaInicio")), request.getParameter("NIF"));
 
@@ -42,9 +41,7 @@ public class VerReserva extends HttpServlet {
             }
             request.setAttribute("reserva", r);
             request.getRequestDispatcher("WEB-INF/views/reservas/view.jsp").forward(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(VerReserva.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotFoundException ex) {
+        } catch (ParseException | NotFoundException ex) {
             request.getSession().setAttribute("error", true);
             request.getSession().setAttribute("msg", "Reserva no encontrada");
             response.sendRedirect("./Reservas");
